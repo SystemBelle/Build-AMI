@@ -1,0 +1,105 @@
+# Jamie Carranza
+# October 3, 2011
+
+# Build a Linux EC2 AMI
+# For RPM based distributions
+
+
+# Based on the this wonderful tutorial, thanks Phil!
+# http://www.philchen.com/2009/02/14/how-to-create-an-amazon-elastic-compute-cloud-ec2-machine-image-ami
+
+    ## Features
+
+# Can build instance store or EBS backed AMIs from scratch
+# Can use YUM repos from build host or distro default
+
+
+# Must have access to any YUM repositories specifed
+
+    ## Create Instance Store Backed AMIs
+
+# Set "EBS=0", and set "ROOT" to be a local filesystem location large enough
+# to hold your AMI, which can be 10GB max size.
+
+
+    ## Create EBS Backed AMIs
+
+# EBS volumes must be built on a EC2 instance.  Once built, snapshot and
+# register the EBS volume as an AMI.
+
+# Attach an EBS volume of desired size to a running instance.  Set "EBS=1",
+# and set "ROOT" to be the mounted EBS volume.
+
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+#			Basic Configuration
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+WORKING_DIR=''
+
+# Base name of the AMI to build (finished AMI will have a '.img' extension)
+AMI_NAME=''
+
+# Where to build AMI (instance store only)
+AMI_DIR=""
+
+# Mount point for AMI image
+ROOT="/mnt/${AMI_NAME}"
+
+# Services to disable
+SVC_DISABLE=''
+
+# Add curl command to rc.local to download private key from instance metadata
+# overwriting or appending to exising /root/.ssh/authorized_keys, or "none" to
+# delete all root private keys. 
+# "overwrite", "append", or "none".  default: "overwrite"
+PRIVATE_KEY='append'
+
+# Add optional user account (use md5 hashed password)
+#USER=''
+#PASSWORD=''
+
+# URL for EC2 AMI tools
+AMI_TOOLS_URL=''
+
+# URL for EC2 API tools
+API_TOOLS_URL=''
+
+# Build on EBS volume
+EBS='1'
+
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+#			Advanced Configuration
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+# Yum package group, Core or Base 
+YUM_GROUPS='base'
+
+# Other packages to add, must be available in the repo you make available
+PACKAGES=''
+
+# Whether to use a default YUM configuration to build the AMI or copy the host system's
+USE_HOST_YUM_CFG='0'
+
+# If USE_HOST_YUM_CFG='1', whether to keep host system's YUM config in the AMI or reset with distro default
+RESET_YUM_CFG='0'
+
+# If USE_HOST_YUM_CFG='0', specify the URL to the package containing the desired distribution's YUM configuration, i.e. 'centos-release'
+DISTRO_RELEASE=''
+
+# Where to put AMI and API tools
+AMI_TOOLS="${WORKING_DIR}/AMI_TOOLS"
+API_TOOLS="${WORKING_DIR}/API_TOOLS"
+
+# AMI Size (MB) - For instance-store only
+# Limited to 10 GB (10240 MB)
+SIZE='10240'
+
+# Whether to make the image file sparse
+SPARSE='1'
+
+# Filesystem type for root filesystem
+FSTYPE='ext3'
+
+# Optional - URL for kernel modules
+#KERNEL_MODULES=''
+
