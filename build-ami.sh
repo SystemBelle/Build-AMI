@@ -1,14 +1,16 @@
 #!/bin/bash
 
-# Jamie Carranza
-# October 3, 2011
+# build-ami.sh
+# Copyright 2010 - 2012 Jamie Carranza
+# jamie.carranza@gmail.com
+# March 9, 2012
 
 # Build a Linux EC2 AMI
-# For RPM based distributions
-
+# For the Redhat family of distributions
 
 # Based on the this wonderful tutorial, thanks Phil!
 # http://www.philchen.com/2009/02/14/how-to-create-an-amazon-elastic-compute-cloud-ec2-machine-image-ami
+
 
     ## Features
 
@@ -31,6 +33,23 @@
 
 # Attach an EBS volume of desired size to a running instance.  Set "EBS=1",
 # and set "ROOT" to be the mounted EBS volume.
+
+#-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+# This file is part of Build-AMI.
+
+# Build-AMI is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# Build-AMI is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with Build-AMI. If not, see <http://www.gnu.org/licenses/>.
 
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 #			Basic Configuration
